@@ -1,0 +1,2 @@
+#!/bin/bash
+echo "Aujourd'huit j'apprends Linux."
