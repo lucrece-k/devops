@@ -1,0 +1,23 @@
+services:
+  api:
+    build: .
+    ports:
+      - "3006:3000"
+
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: postgres:17
+
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: secret
+      POSTGRES_DB: devops
+
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
